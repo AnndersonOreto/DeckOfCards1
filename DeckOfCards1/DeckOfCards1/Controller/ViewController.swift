@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         if let url = urlString {
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if error != nil {
-                    print(error)
+                    print(error ?? "")
                 } else {
                     if let usableData = data {
                         print(usableData) //JSONSerialization
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         if let url = urlString {
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if error != nil {
-                    print(error)
+                    print(error ?? "")
                 } else {
                     if let usableData = data {
                         print(usableData) //JSONSerialization
