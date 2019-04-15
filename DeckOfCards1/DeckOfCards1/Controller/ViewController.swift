@@ -28,8 +28,15 @@ class ViewController: UIViewController {
                 } else {
                     do{
                         //here dataResponse received from a network request
-                        let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: [])
-                        print(jsonResponse) //Response result
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
+                        guard let jsonArray = jsonResponse as? [String: Any] else {
+                            return
+                        }
+                        //Now get title value
+                        guard let title = jsonArray["deck_id"] as? String else { return }
+                        self.deckId = title
+                        guard let title2 = jsonArray["remaining"] as? Int else { return }
+                        self.remaining = title2
                     } catch let parsingError {
                         print("Error", parsingError)
                     }
@@ -41,7 +48,7 @@ class ViewController: UIViewController {
     
     func drawCard() {
         
-        let urlString = URL(string: "https://deckofcardsapi.com/api/deck/<<deck_id>>/draw/?count=1")
+        let urlString = URL(string: "https://deckofcardsapi.com/api/deck/\(deckId)/draw/?count=1")
         
         if let url = urlString {
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
