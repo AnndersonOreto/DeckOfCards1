@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createDeck()
-        print("😁")
     }
     
     func createDeck(){
@@ -39,6 +38,30 @@ class ViewController: UIViewController {
                         self.deckId = title
                         guard let title2 = jsonArray["remaining"] as? Int else { return }
                         self.remaining = title2
+                        self.shuffleCards()
+                    } catch let parsingError {
+                        print("Error", parsingError)
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func shuffleCards(){
+        let urlString = URL(string: "https://deckofcardsapi.com/api/deck/\(deckId)/shuffle/")
+        
+        if let url = urlString {
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error ?? "")
+                } else {
+                    do{
+                        //here dataResponse received from a network request
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
+                        guard let jsonArray = jsonResponse as? [String: Any] else {
+                            return
+                        }
                         self.drawCard()
                     } catch let parsingError {
                         print("Error", parsingError)
@@ -77,8 +100,13 @@ class ViewController: UIViewController {
                         guard let code = title2["code"] as? String else { return }
                         
                         self.hand.append(Card(image: image, value: value, suit: suit, code: code))
-                        print(self.hand)
-                        print(jsonResponse)
+                        let url = URL(string: image)
+                        DispatchQueue.global().async {
+                            let data = try? Data(contentsOf: url!)
+                            DispatchQueue.main.async {
+                                self.cardImage.image = UIImage(data: data!)
+                            }
+                        }
                         
                     } catch let parsingError {
                         print("Error", parsingError)
