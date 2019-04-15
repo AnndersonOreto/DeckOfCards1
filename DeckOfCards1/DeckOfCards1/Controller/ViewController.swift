@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var hand: [Card] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
