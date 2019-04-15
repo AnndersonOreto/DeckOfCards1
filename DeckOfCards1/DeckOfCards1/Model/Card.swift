@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct card {
+struct Card {
     let image: String
     let value: String
     let suit: String
