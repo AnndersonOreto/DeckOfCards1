@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         createDeck()
         print("😁")
     }
+    
     func createDeck(){
         let urlString = URL(string: "https://deckofcardsapi.com/api/deck/new/")
         
