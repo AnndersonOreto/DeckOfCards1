@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     var hand: [Card] = []
+    var deckId: String = ""
+    var remaining: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +26,12 @@ class ViewController: UIViewController {
                 if error != nil {
                     print(error ?? "")
                 } else {
-                    if let usableData = data {
-                        print(usableData) //JSONSerialization
+                    do{
+                        //here dataResponse received from a network request
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: [])
+                        print(jsonResponse) //Response result
+                    } catch let parsingError {
+                        print("Error", parsingError)
                     }
                 }
             }
