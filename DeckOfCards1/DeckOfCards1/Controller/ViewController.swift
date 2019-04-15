@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         print("😁")
     }
     func createDeck(){
-        let urlString = URL(string: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
+        let urlString = URL(string: "https://deckofcardsapi.com/api/deck/new/")
         
         if let url = urlString {
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
