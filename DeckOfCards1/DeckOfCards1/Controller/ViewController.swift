@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createDeck()
+        drawCard()
         print("😁")
     }
     
@@ -55,15 +56,42 @@ class ViewController: UIViewController {
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if error != nil {
                     print(error ?? "")
+                    
                 } else {
-                    if let usableData = data {
-                        print(usableData) //JSONSerialization
+                    do{
+                        //here dataResponse received from a network request
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
+                        guard let jsonArray = jsonResponse as? [String: Any] else {
+                            return
+                        }
+                        //Now get title value
+                        guard let title = jsonArray["cards"] as? [JSONSerialization] else { return }
+                        guard let title2 = title[0] as? [String : Any] else { return }
+                        
+                        
+                        print(jsonResponse)
+                        
+                    } catch let parsingError {
+                        print("Error", parsingError)
                     }
                 }
             }
             task.resume()
         }
         
+    }
+    
+    func jsonParser(aux: Data) {
+        do{
+            //here dataResponse received from a network request
+            let jsonResponse = try JSONSerialization.jsonObject(with: aux, options:.allowFragments)
+            guard let jsonArray = jsonResponse as? [String: Any] else {
+                return
+            }
+            
+        }catch let parsingError {
+            print("Error", parsingError)
+        }
     }
 
 }
