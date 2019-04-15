@@ -8,3 +8,9 @@
 
 import Foundation
 
+struct card {
+    let image: String
+    let value: String
+    let suit: String
+    let code: String
+}

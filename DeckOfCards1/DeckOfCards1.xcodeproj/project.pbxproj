@@ -58,13 +58,13 @@
 		268DF3762264E71F00DA17D4 /* DeckOfCards1 */ = {
 			isa = PBXGroup;
 			children = (
-				268DF3772264E71F00DA17D4 /* AppDelegate.swift */,
+				268DF38D2264EFFF00DA17D4 /* Model */,
 				268DF38A2264ECBC00DA17D4 /* Controller */,
 				268DF37B2264E71F00DA17D4 /* Main.storyboard */,
 				268DF37E2264E72100DA17D4 /* Assets.xcassets */,
 				268DF3802264E72100DA17D4 /* LaunchScreen.storyboard */,
 				268DF3832264E72100DA17D4 /* Info.plist */,
-				268DF38D2264EFFF00DA17D4 /* Model */,
+				268DF3772264E71F00DA17D4 /* AppDelegate.swift */,
 			);
 			path = DeckOfCards1;
 			sourceTree = "<group>";
