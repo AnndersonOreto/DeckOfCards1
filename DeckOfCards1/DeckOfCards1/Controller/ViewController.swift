@@ -17,9 +17,10 @@ class ViewController: UIViewController {
     var gameTimer: Timer!
     var playerRedPoints: Int = 0
     var playerBluePoints: Int = 0
+    var pile: Int = 0
     
     @IBOutlet weak var imageButton: UIButton!
-    @IBOutlet weak var buttonRed: UIButton!
+    @IBOutlet weak var buttonBlue: UIButton!
     @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var counterRed: UILabel!
     @IBOutlet weak var pointsRed: UILabel!
@@ -30,6 +31,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         buttonRed.transform = CGAffineTransform(rotationAngle: .pi)
         counterRed.transform = CGAffineTransform(rotationAngle: .pi)
+        pointsRed.transform = CGAffineTransform(rotationAngle: .pi)
         counterRed.text = self.counter.description
         counterBlue.text = self.counter.description
         pointsRed.text = self.playerRedPoints.description
@@ -39,6 +41,10 @@ class ViewController: UIViewController {
     }
     
     @objc func action1() {
+        remaining -= 1
+        if remaining <= 1 {
+            gameTimer.invalidate()
+        }
         drawCard()
         
         let url = URL(string: hand[count].image)
@@ -50,6 +56,7 @@ class ViewController: UIViewController {
             }
         
         count += 1
+        pile += 1
         if counter >= 13 {
             counter = 0
         }
@@ -148,12 +155,45 @@ class ViewController: UIViewController {
         
     }
     @IBAction func blueButton(_ sender: UIButton) {
-        buttonRed.isEnabled = false
-        sender.isEnabled = false
-        if counter == hand[count-1].value {
-            
+        var aux: Int = 0
+        switch hand[count-1].value {
+        case "ACE":
+            aux = 1
+        case "JACK":
+            aux = 11
+        case "QUEEN":
+            aux = 12
+        case "KING":
+            aux = 13
+        default:
+            aux = Int(hand[count-1].value)!
         }
-        
+        if counter == aux {
+            playerBluePoints += pile
+            pile = 0
+            pointsBlue.text = self.playerBluePoints.description
+        }
+    }
+    
+    @IBAction func redButton(_ sender: UIButton) {
+        var aux: Int = 0
+        switch hand[count-1].value {
+        case "ACE":
+            aux = 1
+        case "JACK":
+            aux = 11
+        case "QUEEN":
+            aux = 12
+        case "KING":
+            aux = 13
+        default:
+            aux = Int(hand[count-1].value)!
+        }
+        if counter == aux {
+            playerRedPoints += pile
+            pile = 0
+            pointsRed.text = self.playerRedPoints.description
+        }
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
