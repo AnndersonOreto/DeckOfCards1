@@ -12,7 +12,14 @@ class ViewController: UIViewController {
     var hand: [Card] = []
     var deckId: String = ""
     var remaining: Int = 0
-    @IBOutlet weak var cardImage: UIImageView!
+    var count: Int = 0
+    var counter: Int = 0
+    var gameTimer: Timer!
+    var playerRedPoints: Int = 0
+    var playerBluePoints: Int = 0
+    
+    @IBOutlet weak var imageButton: UIButton!
+    @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var counterRed: UILabel!
     @IBOutlet weak var pointsRed: UILabel!
@@ -23,7 +30,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         buttonRed.transform = CGAffineTransform(rotationAngle: .pi)
         counterRed.transform = CGAffineTransform(rotationAngle: .pi)
+        counterRed.text = self.counter.description
+        counterBlue.text = self.counter.description
+        pointsRed.text = self.playerRedPoints.description
+        pointsBlue.text = self.playerBluePoints.description
         createDeck()
+        gameTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(action1), userInfo: nil, repeats: true)
+    }
+    
+    @objc func action1() {
+        drawCard()
+        
+        let url = URL(string: hand[count].image)
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                self.counterRed.text = self.counter.description
+                self.counterBlue.text = self.counter.description
+                self.imageButton.setImage(UIImage(data: data!), for: .normal)
+            }
+        
+        count += 1
+        if counter >= 13 {
+            counter = 0
+        }
+        counter += 1
     }
     
     func createDeck(){
@@ -107,13 +137,6 @@ class ViewController: UIViewController {
                         guard let code = title2["code"] as? String else { return }
                         
                         self.hand.append(Card(image: image, value: value, suit: suit, code: code))
-                        let url = URL(string: image)
-                        DispatchQueue.global().async {
-                            let data = try? Data(contentsOf: url!)
-                            DispatchQueue.main.async {
-                                self.cardImage.image = UIImage(data: data!)
-                            }
-                        }
                         
                     } catch let parsingError {
                         print("Error", parsingError)
@@ -124,20 +147,35 @@ class ViewController: UIViewController {
         }
         
     }
-    
-    func jsonParser(aux: Data) {
-        do{
-            //here dataResponse received from a network request
-            let jsonResponse = try JSONSerialization.jsonObject(with: aux, options:.allowFragments)
-            guard let jsonArray = jsonResponse as? [String: Any] else {
-                return
-            }
+    @IBAction func blueButton(_ sender: UIButton) {
+        buttonRed.isEnabled = false
+        sender.isEnabled = false
+        if counter == hand[count-1].value {
             
-        }catch let parsingError {
-            print("Error", parsingError)
+        }
+        
+    }
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        
+        let card1 = hand[count-1]
+        performSegue(withIdentifier: "info", sender: card1)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+        case "info":
+            let dest : DetailViewController = segue.destination as! DetailViewController
+            dest.card = sender as? Card
+        default:
+            break
         }
     }
 
 }
+
 
 

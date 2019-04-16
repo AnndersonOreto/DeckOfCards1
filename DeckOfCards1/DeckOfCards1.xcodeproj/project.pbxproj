@@ -14,6 +14,7 @@
 		268DF3822264E72100DA17D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 268DF3802264E72100DA17D4 /* LaunchScreen.storyboard */; };
 		268DF38C2264EFE800DA17D4 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268DF38B2264EFE800DA17D4 /* Card.swift */; };
 		268DF38F2264F01700DA17D4 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268DF38E2264F01700DA17D4 /* Game.swift */; };
+		AB202A0522663F93003BF132 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB202A0422663F93003BF132 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		268DF3832264E72100DA17D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		268DF38B2264EFE800DA17D4 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		268DF38E2264F01700DA17D4 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		AB202A0422663F93003BF132 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				268DF3792264E71F00DA17D4 /* ViewController.swift */,
+				AB202A0422663F93003BF132 /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			files = (
 				268DF37A2264E71F00DA17D4 /* ViewController.swift in Sources */,
 				268DF38C2264EFE800DA17D4 /* Card.swift in Sources */,
+				AB202A0522663F93003BF132 /* DetailViewController.swift in Sources */,
 				268DF3782264E71F00DA17D4 /* AppDelegate.swift in Sources */,
 				268DF38F2264F01700DA17D4 /* Game.swift in Sources */,
 			);
@@ -307,6 +311,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LZ4KUFVTZH;
 				INFOPLIST_FILE = DeckOfCards1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -324,6 +329,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LZ4KUFVTZH;
 				INFOPLIST_FILE = DeckOfCards1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
