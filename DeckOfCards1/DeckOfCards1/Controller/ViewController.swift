@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var cardImage: UIImageView!
     @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var counterRed: UILabel!
+    @IBOutlet weak var pointsRed: UILabel!
+    @IBOutlet weak var counterBlue: UILabel!
+    @IBOutlet weak var pointsBlue: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

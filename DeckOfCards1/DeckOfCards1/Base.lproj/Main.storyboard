@@ -117,7 +117,10 @@
                     <connections>
                         <outlet property="buttonRed" destination="Qix-oP-MPh" id="UJu-WA-5yF"/>
                         <outlet property="cardImage" destination="ARr-vc-nhX" id="6zU-m3-nEZ"/>
+                        <outlet property="counterBlue" destination="P1x-Lj-YxS" id="oxP-mC-a5o"/>
                         <outlet property="counterRed" destination="tp2-et-IaO" id="o9I-zf-I7a"/>
+                        <outlet property="pointsBlue" destination="zeK-07-85W" id="TwH-Rd-npz"/>
+                        <outlet property="pointsRed" destination="sc6-S9-QC5" id="jUc-hW-maK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
