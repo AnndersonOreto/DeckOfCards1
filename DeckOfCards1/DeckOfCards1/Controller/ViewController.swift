@@ -13,9 +13,13 @@ class ViewController: UIViewController {
     var deckId: String = ""
     var remaining: Int = 0
     @IBOutlet weak var cardImage: UIImageView!
+    @IBOutlet weak var buttonRed: UIButton!
+    @IBOutlet weak var counterRed: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttonRed.transform = CGAffineTransform(rotationAngle: .pi)
+        counterRed.transform = CGAffineTransform(rotationAngle: .pi)
         createDeck()
     }
     

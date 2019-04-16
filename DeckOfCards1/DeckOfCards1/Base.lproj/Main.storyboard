@@ -115,7 +115,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="buttonRed" destination="Qix-oP-MPh" id="UJu-WA-5yF"/>
                         <outlet property="cardImage" destination="ARr-vc-nhX" id="6zU-m3-nEZ"/>
+                        <outlet property="counterRed" destination="tp2-et-IaO" id="o9I-zf-I7a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
