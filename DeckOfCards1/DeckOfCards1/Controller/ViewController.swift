@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var playerRedPoints: Int = 0
     var playerBluePoints: Int = 0
     var pile: Int = 0
+    var resp: Bool = false
     
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var buttonBlue: UIButton!
@@ -37,30 +38,38 @@ class ViewController: UIViewController {
         pointsRed.text = self.playerRedPoints.description
         pointsBlue.text = self.playerBluePoints.description
         createDeck()
-        gameTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(action1), userInfo: nil, repeats: true)
+        while !resp { }
+        gameTimer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(action1), userInfo: nil, repeats: true)
     }
     
     @objc func action1() {
         remaining -= 1
-        if remaining <= 1 {
-            gameTimer.invalidate()
-        }
         drawCard()
         
+        counter += 1
+        self.counterRed.text = self.counter.description
+        self.counterBlue.text = self.counter.description
         let url = URL(string: hand[count].image)
             let data = try? Data(contentsOf: url!)
             DispatchQueue.main.async {
-                self.counterRed.text = self.counter.description
-                self.counterBlue.text = self.counter.description
                 self.imageButton.setImage(UIImage(data: data!), for: .normal)
             }
+        if remaining <= 5 {
+            if playerRedPoints > playerBluePoints {
+                self.counterRed.text = "RED WINS"
+                self.counterBlue.text = "RED WINS"
+            } else {
+                self.counterRed.text = "BLUE WINS"
+                self.counterBlue.text = "BLUE WINS"
+            }
+            gameTimer.invalidate()
+        }
         
         count += 1
         pile += 1
         if counter >= 13 {
             counter = 0
         }
-        counter += 1
     }
     
     func createDeck(){
@@ -107,6 +116,8 @@ class ViewController: UIViewController {
                             return
                         }
                         self.drawCard()
+                        self.drawCard()
+                        self.drawCard()
                     } catch let parsingError {
                         print("Error", parsingError)
                     }
@@ -144,6 +155,7 @@ class ViewController: UIViewController {
                         guard let code = title2["code"] as? String else { return }
                         
                         self.hand.append(Card(image: image, value: value, suit: suit, code: code))
+                        self.resp = true
                         
                     } catch let parsingError {
                         print("Error", parsingError)
